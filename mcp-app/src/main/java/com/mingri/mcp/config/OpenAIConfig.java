@@ -1,5 +1,10 @@
 package com.mingri.mcp.config;
 
+import io.micrometer.observation.ObservationRegistry;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.DefaultChatClientBuilder;
+import org.springframework.ai.chat.client.observation.ChatClientObservationConvention;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import org.springframework.ai.openai.api.OpenAiApi;
@@ -54,5 +59,13 @@ public class OpenAIConfig {
                 .vectorTableName("vector_store_openai")
                 .build();
     }
+
+
+
+    @Bean
+    public ChatClient.Builder chatClientBuilder(OpenAiChatModel openAiChatModel) {
+        return new DefaultChatClientBuilder(openAiChatModel, ObservationRegistry.NOOP, (ChatClientObservationConvention) null);
+    }
+
 
 }

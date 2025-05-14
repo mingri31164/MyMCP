@@ -11,6 +11,10 @@ spring:
     url: jdbc:postgresql://127.0.0.1:5432/ai-rag-knowledge
     type: com.zaxxer.hikari.HikariDataSource
   ai:
+    mcp:
+      client:
+        stdio:
+          servers-configuration: classpath:/config/mcp-servers-config.json
     openai:
       base-url:
       api-key:
